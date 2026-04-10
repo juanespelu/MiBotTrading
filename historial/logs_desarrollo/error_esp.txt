@@ -1,0 +1,1 @@
+binance GET https://fapi.binance.com/fapi/v1/klines?interval=1h&limit=210&symbol=ETHUSDT

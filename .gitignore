@@ -1,0 +1,61 @@
+# Credenciales y configuración sensible
+.env
+*.env
+.env.*
+
+# API Keys y tokens (si están en archivos separados)
+config/api_keys.py
+secrets.py
+credentials.json
+
+# Entornos virtuales
+venv/
+env/
+.venv/
+.env/
+ENV/
+
+# Archivos compilados Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# IDE y editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Configuración local Claude Code
+.claude/
+
+# Logs temporales y archivos de debugging
+*.log
+debug.txt
+temp/
+tmp/
+
+# Logs grandes de desarrollo histórico (>50MB)
+logs_simulador/log_scans_2026-W12.txt
+historial/logs_desarrollo/log_sniper_sim.txt
