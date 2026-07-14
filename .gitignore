@@ -47,15 +47,22 @@ MANIFEST
 .DS_Store
 Thumbs.db
 
-# Configuración local Claude Code
-.claude/
+# Configuración local Claude Code (el settings.json compartido SÍ se versiona)
+.claude/*
+!.claude/settings.json
 
 # Logs temporales y archivos de debugging
 *.log
 debug.txt
 temp/
 tmp/
+# log de runtime del especialista (no versionar) — comentario en línea propia: inline rompe el patrón
+error_esp.txt
 
 # Logs grandes de desarrollo histórico (>50MB)
 logs_simulador/log_scans_2026-W12.txt
 historial/logs_desarrollo/log_sniper_sim.txt
+
+# Datos pesados que NO van al repo (GitHub rechaza >100MB por archivo)
+analisis_VPS_2026-06-04/
+analisis/datasets/

@@ -251,12 +251,15 @@ def simular_sniper():
             estado_display = "⚡ OPEN " + " | ".join(partes)
         else:
             estado_display = "Escaneando..."
-        sys.stdout.write(
-            f"\r🕵️ [{datetime.now().strftime('%H:%M:%S')}] "
-            f"Bal SIM ${estado['balance_acumulado']:.2f} | "
-            f"{estado_display} "
-        )
-        sys.stdout.flush()
+        # Solo display en vivo si hay TTY. Bajo systemd no hay TTY: evita el
+        # spam de '\r' que infló el journal del sistema a giga.
+        if sys.stdout.isatty():
+            sys.stdout.write(
+                f"\r🕵️ [{datetime.now().strftime('%H:%M:%S')}] "
+                f"Bal SIM ${estado['balance_acumulado']:.2f} | "
+                f"{estado_display} "
+            )
+            sys.stdout.flush()
 
         for simbolo in CARTERA:
             adn = DNA_FLOTA[simbolo]

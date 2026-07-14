@@ -1,0 +1,2 @@
+# ❄️ CONGELADO el 14-jul-2026 (rediseño Parte 2, paso 13). El versionado vivo es git.
+Esta carpeta de respaldos (bots y especialistas viejos, logs de desarrollo, copias timestamped de CONTEXT y CLAUDE) dejó de crecer al morir sync-contexts.bat. Se conserva como legado local (retiro re-evaluable ~6 meses, cuando la confianza en git esté ganada por uso — decisión de S1). Se consulta como historia, jamás como fuente.
