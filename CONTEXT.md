@@ -50,7 +50,7 @@ estado_bot.json           — Estado posiciones bot real (max 1 posición)
 .gitignore                — Protección de archivos sensibles
 ERRORES_CONOCIDOS.md      — Errores del proyecto (#N65) — se lee COMPLETO al arrancar cada sesión
 CREDO.md                  — Re-anclaje del Trader por turno (#N71) — lo inyecta el hook UserPromptSubmit
-.claude/settings.json     — Hooks: herencia PROTOCOLO+PERFIL (SessionStart, #N72) + CREDO por turno (#N71) + re-anclaje compact
+.claude/settings.json     — Hooks (patrón node .claude/hooks/*.mjs): orden de lectura PROTOCOLO+PERFIL al arranque (SessionStart) · CREDO inyectado por turno (UserPromptSubmit) · aviso post-compact
 .claude/hooks/            — Scripts node de los 3 hooks (#N72-bis: el runner NO es cmd) — credo / herencia / aviso-compact .mjs
 .claude/commands/cierre.md — /cierre: fuerza la RELECTURA del §6 del PROTOCOLO, jamás copia los pasos (#N36)
 start_bot_real.sh         — Wrapper systemd del bot real (carga .env)
@@ -499,6 +499,7 @@ Análisis completo de la estrategia del simulador sobre **496 trades válidos** 
 - El catch del Programador destapó que los `@import` con `../` de los CLAUDEs de las islas NO expanden — fallan en silencio (#N72): el PROTOCOLO y el PERFIL nunca llegaban por import; sostenía el blindaje del CLAUDE local. Confirmado en carne propia en el arranque de esta sesión.
 - Fix aplicado (paquete aprobado por Juan): CLAUDE.md sin `@imports` + herencia por hook `SessionStart` (inyecta PROTOCOLO+PERFIL) · nace `CREDO.md` inyectado a CADA turno por hook `UserPromptSubmit` (#N71, texto aprobado línea por línea) · nace `/cierre` (relee el §6, jamás lo copia — #N36) · `.gitignore` con `!.claude/commands/`. Verificación pendiente del próximo arranque: PROTOCOLO+PERFIL contenido-EN-contexto (no ruta-existe).
 - **#N72-bis (mismo día, catch del Programador):** el runner de hooks NO es cmd — el patrón `chcp >nul & type` corría a medias (síntoma: archivo `nul` por turno; el CREDO nunca se inyectó). Los 3 hooks pasan a **scripts node** (`.claude/hooks/credo|herencia|aviso-compact.mjs`, copiados de dronedocs con el PERFIL del trader). Diseño v2 de la herencia: los outputs grandes de hooks truncan a ~2KB de preview → el hook inyecta la ORDEN obligatoria de leer PROTOCOLO+PERFIL, no los ~20KB de contenido.
+- *(nota 16-jul: la anatomía final es v2 — viaja la ORDEN de lectura, no la inyección; detalle en `el-universo/ERRORES_CONOCIDOS.md`)*
 
 ### Sesión 13/14-jul-2026 (bitácora 2026-07-13-C) — Puesta al día documental + respaldo (el bot NO se tocó)
 - Renacimiento del territorio: `CLAUDE.md` nuevo (protocolo heredado por import, reglas de seguridad conservadas verbatim) + `.claude/settings.json` versionado (additionalDirectories + hook de re-anclaje). Nace `ERRORES_CONOCIDOS.md` (#N65): 7 errores fundacionales + 1 nuevo (patrón de .gitignore roto por comentario inline). Fix §6 del CONTEXT de rol (MCPs falsos, #N54). `historial/` congelado ❄️. Decisiones locales numeradas **MBT-L1–L29** (L12/L13/L14 marcadas `→` por el transplante).
