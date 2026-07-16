@@ -1,0 +1,2 @@
+// C.5-ter — aviso de re-anclaje tras una compactación (SessionStart:compact).
+console.log('RE-ANCLAJE REQUERIDO (hook SessionStart:compact, C.5-ter): acaba de ocurrir una compactacion de contexto. Ejecuta AHORA el ritual del PROTOCOLO seccion 5: (1) relee el PROTOCOLO_SESION inyectado, (2) relee este CLAUDE.md, (3) relee tu SESSION_LOG en curso, y confirma en UNA linea: Re-anclado: [regla mas relevante para lo que sigue].');

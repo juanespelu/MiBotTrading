@@ -47,10 +47,11 @@ MANIFEST
 .DS_Store
 Thumbs.db
 
-# Configuración local Claude Code (el settings.json compartido y commands/ SÍ se versionan)
+# Configuración local Claude Code (el settings.json compartido, commands/ y hooks/ SÍ se versionan)
 .claude/*
 !.claude/settings.json
 !.claude/commands/
+!.claude/hooks/
 
 # Logs temporales y archivos de debugging
 *.log
