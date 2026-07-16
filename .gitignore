@@ -57,6 +57,8 @@ Thumbs.db
 debug.txt
 temp/
 tmp/
+# Artefacto de los hooks en Windows: el runner materializa >nul como ARCHIVO vacío en el cwd, se recrea por turno (15-jul-2026)
+nul
 # log de runtime del especialista (no versionar) — comentario en línea propia: inline rompe el patrón
 error_esp.txt
 
