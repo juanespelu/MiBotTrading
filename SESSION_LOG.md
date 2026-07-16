@@ -225,3 +225,41 @@ Sesión larga. Cadena: migración SSH → análisis de estrategia (496 trades) �
 6. **INFRAESTRUCTURA.md:** sin cambios de infra (VPS intocado) — no aplica.
 7. **Git:** commit único de puesta al día → tag **v4.0.0** (retroactivo, bafaec9) + **v5.0.0** (el commit nuevo) → push a GitHub privado. Resultado confirmado en el reporte de cierre del chat; si algo falla, se AGREGA acá la corrección. "Build": py_compile de los .py como equivalente local (el código real corre vivo e intacto en el VPS desde el 5-jun).
 8. **Reporte de cierre con checklist a la vista → en el chat.** El acta canónica la escribe el cerebro (acta única, ID 2026-07-13-C); este LOG es el detalle técnico federado.
+
+---
+
+## Sesión — 15 de julio de 2026 — Bitácora **2026-07-15-E** (la herencia real: #N71 + #N72 — documental + settings; el bot NO se tocó)
+
+**Alcance acordado:** documental + `.claude/settings.json` — NADA del bot vivo, NADA de estrategia, CERO secretos (la rotación de las keys de Binance sigue agendada para su sesión dedicada). Acta canónica: la escribe el cerebro (acta única — sesión con cerebro abierto); acá el detalle técnico federado.
+
+**El porqué (las dos leyes del día, llegadas del cerebro):**
+- **#N72 — la herencia real:** el catch del Programador (test conductual del día — de los grandes) destapó que los `@import` con `../` de los CLAUDEs de las islas NO expanden: fallan EN SILENCIO. **Confirmado en carne propia en este arranque:** las líneas `@../...` de mi CLAUDE llegaron como texto literal; ni el PROTOCOLO ni mi PERFIL estaban en mi contexto (los leí a mano para esta sesión). Mi blindaje local sostuvo el territorio desde el 13-jul. Detalle canónico: `el-universo/ERRORES_CONOCIDOS.md` (nació hoy).
+- **#N71 — el CREDO:** en sesiones largas las reglas pierden saliencia; nace `CREDO.md` (destilado de las reglas de sangre) inyectado a CADA turno por hook `UserPromptSubmit`, al final del contexto, donde la atención es máxima.
+
+### Cambios aplicados (paquete aprobado por Juan, pieza por pieza)
+1. **`CLAUDE.md` — cirugía:** retiradas las 2 líneas `@../el-universo/...`; el párrafo en cursiva reemplazado por la anatomía nueva (PROTOCOLO+PERFIL inyectados por SessionStart, CREDO por turno, los CONTEXT se LEEN); bump del header (15-jul, #N71+#N72). **+1 fix de integridad (§9: referencia muerta que dejaba la cirugía):** en MI TERRITORIO, "(heredados arriba)" apuntaba a los imports retirados → "(inyectados por hook SessionStart — #N72)".
+2. **`.claude/settings.json`:** entrada `SessionStart` SIN matcher (inyecta PROTOCOLO+PERFIL vía `chcp 65001 >nul & type ...` — comando PLANO: lección del día, jamás `cmd /c` anidado) antes del bloque `compact` (conservado INTACTO) + evento `UserPromptSubmit` nuevo (inyecta `CREDO.md`). JSON validado ✓.
+3. **`CREDO.md` NACE (#N71):** texto aprobado por Juan VERBATIM — línea de gobernanza + 7 puntos + checkpoint. Cero números que envejecen adentro ✓ (nace por decisión: no es deriva de catálogo).
+4. **`.claude/commands/cierre.md` NACE:** `/cierre` fuerza la RELECTURA del §6 en su única casa y lo corre a la vista — jamás copia los pasos (#N36).
+5. **`.gitignore`:** `+!.claude/commands/` (el `!.claude/settings.json` ya estaba de la 13-C; la base `.claude/*` con asterisco es la forma que permite excepciones ✓).
+
+### Verificaciones (efecto observable, no intención — regla 12 del rol)
+- JSON de settings parseado OK: 2 entradas `SessionStart` (sin-matcher + compact) · 1 `UserPromptSubmit`.
+- Smoke test del comando EXACTO de cada hook (vía cmd, cwd del proyecto): SessionStart → exit 0, 234 líneas, PROTOCOLO completo (incluye §6) + PERFIL concatenados, UTF-8 correcto; UserPromptSubmit → exit 0, CREDO íntegro (emoji ⚓ y #N70 presentes).
+- `git check-ignore` del grupo: solo `settings.local.json` sigue ignorado; `settings.json`, `commands/cierre.md` y `CREDO.md` entran al repo ✓.
+- **Pendiente estructural (lección del día): la verificación REAL de la herencia va en el PRÓXIMO arranque — confirmar PROTOCOLO+PERFIL contenido-EN-contexto, jamás ruta-existe.** Los hooks nuevos cargan recién en sesión nueva; el smoke de hoy solo garantiza que el comando no está roto.
+
+### Observaciones cacheadas (reportadas a Juan en el chat)
+- El hook `compact` heredado dice "relee el PROTOCOLO_SESION **heredado**" — palabra vieja (ahora es *inyectado*). Se dejó INTACTO como pidió el paquete (además: los edits a hooks no recargan en caliente). Ajuste candidato para otra sesión, no urgente — y de yapa: la entrada sin matcher también corre en compact, así que el protocolo llega FRESCO justo antes del aviso de re-anclaje; se refuerzan.
+- El ID **E** del día ya aparece en `el-universo/ERRORES_CONOCIDOS.md` ligado al test del Programador → se asume que E es el EVENTO del día (rollout de la herencia real) y cubre a los especialistas en paralelo (acta única). Si me tocaba otra letra, corregir acá.
+- El header de mi CLAUDE decía desde el 13-jul "el protocolo se HEREDA vía import" — estuvo 2 días describiendo una herencia que nunca operó; el bump de hoy lo deja honesto.
+
+### Cierre §6 (checklist RELEÍDO del PROTOCOLO — sesión documental, sin build/tag: no se tocó código)
+1. **SESSION_LOG completo ✓** — esta entrada (abre con el ID de bitácora).
+2. **CONTEXT del proyecto verificado ✓** — header + §2 (CREDO.md, `.claude/`) + §12 (entrada de la sesión) al día; el estado del BOT no cambió (ni VPS, ni parámetros, ni `.env`).
+3. **Destilado al CONTEXT de rol ✓ — N=1 aprendizaje:** herencia inter-repo por hook (jamás `@import` con `../`; comando plano en Windows; hooks editados no recargan en caliente; verificación = contenido-en-contexto en sesión fresca).
+4. **ERRORES_CONOCIDOS.md del proyecto — 0 errores nuevos DEL PROYECTO:** el error del día es de PLATAFORMA y su casa canónica es `el-universo/ERRORES_CONOCIDOS.md` (nació hoy allá, escrito por el cerebro); el saber cruzado quedó destilado al CONTEXT de rol (micro-test 2 del router). Graduación al CLAUDE: no aplica (la conducta nueva ya quedó instalada por el propio paquete #N71/#N72).
+5. **INFORME_TECNICO** — no existe en proyectos del Trader (el CONTEXT es exhaustivo, PERFIL): no aplica.
+6. **INFRAESTRUCTURA.md** — sin cambios de infra (VPS intocado): no aplica.
+7. **Git:** commit documental de las 6 piezas (CLAUDE, settings, CREDO, cierre.md, .gitignore, CONTEXT+LOG) → status limpio · build/tag: N/A (sin código) · **push: GATE DE JUAN pendiente** (se pregunta en el chat). El fix del CONTEXT de rol queda en el repo `el-universo` para el commit del cerebro (acta única / territorio). Resultado del commit confirmado en el reporte del chat; si algo falla, se AGREGA acá la corrección.
+8. **Confirmación con el checklist a la vista → en el chat**, incluyendo "CONTEXT al día ✓".

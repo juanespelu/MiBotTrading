@@ -1,5 +1,5 @@
 # CONTEXTO DEL PROYECTO — Bots de Trading Binance Futures
-**Última actualización:** 5 de junio de 2026 — Semana W24 (transplante a V5.0 + go-live real con dinero). *[5-jul-2026: se agregó únicamente el pendiente de dockerizar el bot en §1 Infraestructura — el estado del bot NO cambió desde W24; el bot no se tocó en la migración del Universo.]* *[14-jul-2026 (bitácora 2026-07-13-C): puesta al día documental — nace `ERRORES_CONOCIDOS.md` (#N65), §14 numerado `MBT-L1–L29`, repo commiteado + tags v4.0.0 (retro) / v5.0.0 + push; el estado del bot NO cambió.]*
+**Última actualización:** 5 de junio de 2026 — Semana W24 (transplante a V5.0 + go-live real con dinero). *[5-jul-2026: se agregó únicamente el pendiente de dockerizar el bot en §1 Infraestructura — el estado del bot NO cambió desde W24; el bot no se tocó en la migración del Universo.]* *[14-jul-2026 (bitácora 2026-07-13-C): puesta al día documental — nace `ERRORES_CONOCIDOS.md` (#N65), §14 numerado `MBT-L1–L29`, repo commiteado + tags v4.0.0 (retro) / v5.0.0 + push; el estado del bot NO cambió.]* *[15-jul-2026 (bitácora 2026-07-15-E): herencia real (#N71/#N72) — CLAUDE sin `@imports` (no expandían), PROTOCOLO+PERFIL inyectados por hook SessionStart, nace `CREDO.md` (hook por turno) + `/cierre`; el estado del bot NO cambió.]*
 **Estado:** ✅ Bot real V5.0 EN VIVO con dinero real en VPS Contabo (Ubuntu 24.04), systemd auto-restart + Telegram activo. Campeón y Retador en paper. SSH endurecido a solo-llave.
 
 > **Nota de regeneración (W24 — regla de no-pérdida #51).** Al transplantar la estrategia validada del simulador al bot real (V4 → V5) se reordenó este documento: se **condensó de forma consciente** el detalle de la estrategia que dejó de correr —el cerebro V4 (filtro K<45, parámetros y trailing viejos) y el simulador V7.5 retirado—, porque un documento de estado refleja la foto actual. **El detalle completo de lo retirado vive en:** `bot_maestro_v4.py.bak_W24`, el `SESSION_LOG.md` del Trader (entrada W24) y el historial de git. Todo lo vigente (cuerpo de ejecución, especialista, campos del análisis, errores, historial, decisiones) se conservó.
@@ -49,6 +49,9 @@ estado_bot.json           — Estado posiciones bot real (max 1 posición)
 .env                      — API keys Binance + tokens Telegram — NO en Git
 .gitignore                — Protección de archivos sensibles
 ERRORES_CONOCIDOS.md      — Errores del proyecto (#N65) — se lee COMPLETO al arrancar cada sesión
+CREDO.md                  — Re-anclaje del Trader por turno (#N71) — lo inyecta el hook UserPromptSubmit
+.claude/settings.json     — Hooks: herencia PROTOCOLO+PERFIL (SessionStart, #N72) + CREDO por turno (#N71) + re-anclaje compact
+.claude/commands/cierre.md — /cierre: fuerza la RELECTURA del §6 del PROTOCOLO, jamás copia los pasos (#N36)
 start_bot_real.sh         — Wrapper systemd del bot real (carga .env)
 
 logs_real/                — Logs del bot REAL (separados de los paper, instrucción firme de Juan)
@@ -490,6 +493,10 @@ Análisis completo de la estrategia del simulador sobre **496 trades válidos** 
 ---
 
 ## 12. HISTORIAL DE SESIONES
+
+### Sesión 15-jul-2026 (bitácora 2026-07-15-E) — La herencia real: hooks #N71/#N72 (documental — el bot NO se tocó)
+- El catch del Programador destapó que los `@import` con `../` de los CLAUDEs de las islas NO expanden — fallan en silencio (#N72): el PROTOCOLO y el PERFIL nunca llegaban por import; sostenía el blindaje del CLAUDE local. Confirmado en carne propia en el arranque de esta sesión.
+- Fix aplicado (paquete aprobado por Juan): CLAUDE.md sin `@imports` + herencia por hook `SessionStart` (inyecta PROTOCOLO+PERFIL) · nace `CREDO.md` inyectado a CADA turno por hook `UserPromptSubmit` (#N71, texto aprobado línea por línea) · nace `/cierre` (relee el §6, jamás lo copia — #N36) · `.gitignore` con `!.claude/commands/`. Verificación pendiente del próximo arranque: PROTOCOLO+PERFIL contenido-EN-contexto (no ruta-existe).
 
 ### Sesión 13/14-jul-2026 (bitácora 2026-07-13-C) — Puesta al día documental + respaldo (el bot NO se tocó)
 - Renacimiento del territorio: `CLAUDE.md` nuevo (protocolo heredado por import, reglas de seguridad conservadas verbatim) + `.claude/settings.json` versionado (additionalDirectories + hook de re-anclaje). Nace `ERRORES_CONOCIDOS.md` (#N65): 7 errores fundacionales + 1 nuevo (patrón de .gitignore roto por comentario inline). Fix §6 del CONTEXT de rol (MCPs falsos, #N54). `historial/` congelado ❄️. Decisiones locales numeradas **MBT-L1–L29** (L12/L13/L14 marcadas `→` por el transplante).

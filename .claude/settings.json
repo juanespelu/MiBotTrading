@@ -5,11 +5,29 @@
   "hooks": {
     "SessionStart": [
       {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "chcp 65001 >nul & type ..\\el-universo\\cerebro\\PROTOCOLO_SESION.md & type ..\\el-universo\\especialistas\\trader\\PERFIL.md"
+          }
+        ]
+      },
+      {
         "matcher": "compact",
         "hooks": [
           {
             "type": "command",
             "command": "echo 'RE-ANCLAJE REQUERIDO (hook SessionStart:compact, C.5-ter): acaba de ocurrir una compactacion de contexto. Ejecuta AHORA el ritual del PROTOCOLO seccion 5: (1) relee el PROTOCOLO_SESION heredado, (2) relee este CLAUDE.md, (3) relee tu SESSION_LOG en curso, y confirma en UNA linea: Re-anclado: [regla mas relevante para lo que sigue].'"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "chcp 65001 >nul & type CREDO.md"
           }
         ]
       }

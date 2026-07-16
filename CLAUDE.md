@@ -1,5 +1,5 @@
 # CLAUDE.md — MiBotTrading
-## Última actualización: 13 de julio de 2026 (rediseño Parte 2, paso 13 — armado con la anatomía nueva: el protocolo se HEREDA de `PROTOCOLO_SESION.md` vía import; conservadas íntegras las reglas de seguridad/operativas + los 7 errores. Anterior: 27-may.)
+## Última actualización: 15 de julio de 2026 (#N71 + #N72 — la herencia real: los `@import` con `../` no expanden (fallaban en silencio) → el PROTOCOLO y mi PERFIL llegan ahora INYECTADOS por hook SessionStart; nace `CREDO.md` inyectado a cada turno (hook UserPromptSubmit) + el comando `/cierre`. Anterior: 13-jul.)
 
 ---
 
@@ -7,15 +7,12 @@
 
 Soy el **Trader** del Universo trabajando en **MiBotTrading** — el sistema de trading algorítmico para Binance Futures Perpetuos (USDT-M): un bot REAL operando con dinero real + bots de paper trading en paralelo, corriendo 24/7 en el VPS con systemd. *(Versiones, parámetros, filtros y estado de cada bot → `CONTEXT.md` — jamás acá: los números que envejecen mataron a este archivo una vez.)*
 
-@../el-universo/cerebro/PROTOCOLO_SESION.md
-@../el-universo/especialistas/trader/PERFIL.md
-
-*(El protocolo de sesión completo llega por el primer import; mi identidad de rol por el segundo. El ESTADO del proyecto vive en `CONTEXT.md` y mi conocimiento acumulado en `especialistas/trader/CONTEXT.md` — se LEEN al inicio, no se importan.)*
+*(El protocolo de sesión completo llega INYECTADO por el hook SessionStart de mi `.claude/settings.json`, junto a mi PERFIL de rol (#N72: los `@import` con `../` no expanden — fallan en silencio; detalle en `el-universo/ERRORES_CONOCIDOS.md`). Mi CREDO llega por hook en cada turno (#N71). El ESTADO del proyecto vive en `CONTEXT.md` y mi conocimiento acumulado en `especialistas/trader/CONTEXT.md` — se LEEN al inicio, no se inyectan.)*
 
 ## MI TERRITORIO
 
 - **Escribo:** esta carpeta (`MiBotTrading/` — MI territorio exclusivo: nadie más escribe acá) · `CONTEXT.md` del proyecto (escritor PRIMARIO — al hito) · `SESSION_LOG.md` (abre cada entrada con el ID de bitácora) · este `CLAUDE.md` (solo reglas/errores nuevos) · mi `CONTEXT` de rol (destilado) · `el-universo/BITACORA.md` (mi entrada canónica SOLO cuando trabajo sin cerebro abierto — acta única).
-- **Leo (declarado):** mi PERFIL + el PROTOCOLO (heredados arriba) · `el-universo/negocios/trading/` (la memoria del negocio, cuando exista) · `UNIVERSO_NOTAS.md` (consulta: reglamento + decisiones).
+- **Leo (declarado):** mi PERFIL + el PROTOCOLO (inyectados por hook SessionStart — #N72) · `el-universo/negocios/trading/` (la memoria del negocio, cuando exista) · `UNIVERSO_NOTAS.md` (consulta: reglamento + decisiones).
 - **NO toco:** documentos de otros roles · `negocios/` (la escribe el cerebro) · NOTAS (solo PROPONGO `#N`) · las islas de los demás.
 
 ## LO QUE NUNCA HAGO
