@@ -50,7 +50,7 @@ estado_bot.json           — Estado posiciones bot real (max 1 posición)
 .gitignore                — Protección de archivos sensibles
 ERRORES_CONOCIDOS.md      — Errores del proyecto (#N65) — se lee COMPLETO al arrancar cada sesión
 CREDO.md                  — Re-anclaje del Trader por turno (#N71) — lo inyecta el hook UserPromptSubmit
-.claude/settings.json     — Hooks (patrón node .claude/hooks/*.mjs): orden de lectura PROTOCOLO+PERFIL al arranque (SessionStart) · CREDO inyectado por turno (UserPromptSubmit) · aviso post-compact
+.claude/settings.json     — Hooks (patrón node .claude/hooks/*.mjs): orden de lectura PROTOCOLO+PERFIL al arranque (SessionStart · #N72) · CREDO inyectado por turno (UserPromptSubmit · #N71) · aviso post-compact
 .claude/hooks/            — Scripts node de los 3 hooks (#N72-bis: el runner NO es cmd) — credo / herencia / aviso-compact .mjs
 .claude/commands/cierre.md — /cierre: fuerza la RELECTURA del §6 del PROTOCOLO, jamás copia los pasos (#N36)
 start_bot_real.sh         — Wrapper systemd del bot real (carga .env)
